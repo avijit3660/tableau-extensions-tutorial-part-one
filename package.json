@@ -1,0 +1,13 @@
+{
+  "name": "tab_extension_1",
+  "version": "1",
+  "description": "First try tableau extension",
+  "main": "1",
+  "repository": "Y",
+  "author": "Avijit Maity",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1"
+  }
+}
