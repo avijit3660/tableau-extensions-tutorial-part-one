@@ -1,13 +1,21 @@
 {
   "name": "tab_extension_1",
-  "version": "1",
+  "version": "6.13.4",
   "description": "First try tableau extension",
   "main": "1",
-  "repository": "Y",
+  "repository": {
+    "type": "git",
+    "url": "Y"
+  },
   "author": "Avijit Maity",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1"
-  }
+  },
+  "scripts": {
+    "start": "node application.js"
+  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "devDependencies": {}
 }

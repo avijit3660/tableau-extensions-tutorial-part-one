@@ -1,0 +1,57 @@
+$(document).ready(function() {
+
+  // Hook up an event handler for the load button click.
+  // Wait to initialize until the button is clicked.
+  $("#initializeButton").click(function() {
+
+    // Disable the button after it's been clicked
+    $("#initializeButton").prop('disabled', true);
+
+    tableau.extensions.initializeAsync().then(function() {
+
+      // Initialization succeeded! Get the dashboard
+      //var dashboard = tableau.extensions.dashboardContent.dashboard;
+      //dashboard = tableau.extensions.dashboardContent.dashboard;
+      const dashboard = tableau.extensions.dashboardContent.dashboard;
+      
+      dashboard.worksheets.forEach(function(worksheet){
+       worksheet.getFiltersAsync().then(function(filters){
+         let filterforP = [];
+         filters.forEach(function (filter){
+           filterforP.push(worksheet.clearFilterAsync(filter.fieldName))
+           //$("#resultBox").html(filter.fieldName);
+         });
+       })
+       $("#resultBox").html("I'm running in a dashboard named <strong>");
+      });
+     
+
+      // Display the name of dashboard in the UI
+      //$("#resultBox").html("I'm running in a dashboard named <strong>" + dashboard.name + "</strong>");
+    },
+    
+    function(err) {
+
+      // something went wrong in initialization
+      $("#resultBox").html("Error while Initializing: " + err.toString());
+    });
+  });
+
+  $("#refresh").click(function() {
+
+     const dashboard = tableau.extensions.dashboardContent.dashboard;
+      
+      dashboard.worksheets.forEach(function(worksheet){
+       worksheet.getFiltersAsync().then(function(filters){
+         let filterforP = [];
+         filters.forEach(function (filter){
+           filterforP.push(worksheet.clearFilterAsync(filter.fieldName))
+           //$("#resultBox").html(filter.fieldName);
+         });
+       })
+       $("#resultBox").html("I'm running in a dashboard named <strong>");
+      });
+
+  });
+
+});

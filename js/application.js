@@ -1,18 +1,49 @@
-'use strict';
- 
-(function () {
-  $(document).ready(function () {
-    // Initialises Tableau Data Extension
-    tableau.extensions.initializeAsync().then(function () {
-        refresh();
-    }, function () { console.log('Error while Initializing: ' + err.toString()); });
+$(document).ready(function() {
+  tableau.extensions.initializeAsync().then(function() {
+    //$("#resultBox").html("Success");
+
+  },
+  function(err) {
+    // something went wrong in initialization
+    $("#resultBox").html("Error while Initializing: " + err.toString());
   });
- 
-  function refresh() {
-    // Gets a list of the worksheets and adds them to the web page.
-    $("#worksheets").text("");
-    tableau.extensions.dashboardContent.dashboard.worksheets.forEach(function (worksheet) {
-        $("#worksheets").append("<button class='btn btn-secondary btn-block'>"+worksheet.name+"</button>");
-    });
-  }
-})();
+  
+  
+  // Hook up an event handler for the load button click.
+  // Wait to initialize until the button is clicked.
+  
+  $("#refresh").click(function() 
+  {
+     { const dashboards = tableau.extensions.dashboardContent.dashboard;
+      if (dashboards.name ==='E2E Summary GPO')
+      
+      dashboards.worksheets.forEach(function(worksheet)
+      {
+        if (worksheet.name ==='QtCr to QtSbmtAprvl (2)')
+        {
+        worksheet.getFiltersAsync().then(function(filters)
+        {
+          
+          let ApplFilt = []
+          filters.forEach(function (filter)
+          {
+            if (filter.fieldName === 'Country Name (Country)' )  {
+                          
+            ApplFilt.push(worksheet.clearFilterAsync(filter.fieldName))
+            //$("#resultBox").html(filter.fieldName); 
+          }
+            else if  (filter.fieldName==='Quote Type')
+            {
+                          
+              ApplFilt.push(worksheet.clearFilterAsync(filter.fieldName))
+             // $("#resultBox").html(filter.fieldName); 
+            }
+           //$("#resultBox").html(filter.fieldName);
+          });
+       }) 
+        }
+      });}
+
+  });
+
+});
